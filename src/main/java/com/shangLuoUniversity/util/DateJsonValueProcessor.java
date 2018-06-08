@@ -1,4 +1,4 @@
-package com.shangLuoUniversity.controller.admin;
+package com.shangLuoUniversity.util;
 
 import java.text.SimpleDateFormat;
 

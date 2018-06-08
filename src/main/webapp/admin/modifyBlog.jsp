@@ -34,7 +34,7 @@
 			alert("请输入内容！");
 		}else{
 			$.post("${pageContext.request.contextPath}/admin/blog/save.do",{'id':'${param.id}','title':title,'blogType.id':blogTypeId,'content':content,'contentNoTag':UE.getEditor('editor').getContentTxt(),'summary':UE.getEditor('editor').getContentTxt().substr(0,155),'keyWord':keyWord},function(result){
-                $("#release").linkbutton({
+                $("#publish").linkbutton({
                     text: "发布博客"
 				});
 				if(result.success){
@@ -82,7 +82,7 @@
    		<tr>
    			<td></td>
    			<td>
-   				<a href="javascript:submitData()" id="release" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">
+   				<a href="javascript:submitData()" id="publish" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">
 					发布博客
 				</a>
    			</td>
@@ -114,8 +114,8 @@
         );
     });
 
-   $("#release").click(function(){
-       $("#release").linkbutton({
+   $("#publish").click(function(){
+       $("#publish").linkbutton({
            text: "正在发布......"
        });
    });

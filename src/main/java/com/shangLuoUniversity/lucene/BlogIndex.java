@@ -1,5 +1,6 @@
 package com.shangLuoUniversity.lucene;
 
+import java.io.File;
 import java.io.StringReader;
 import java.nio.file.Paths;
 import java.util.Date;
@@ -45,6 +46,8 @@ import com.shangLuoUniversity.util.StringUtil;
 public class BlogIndex {
 
 	private Directory dir=null;
+	//获取当前操作系统临时目录
+	String folder=System.getProperty("java.io.tmpdir") + "blog" + File.separator;
 	
 
 	/**
@@ -53,7 +56,8 @@ public class BlogIndex {
 	 * @throws Exception
 	 */
 	private IndexWriter getWriter()throws Exception{
-		dir=FSDirectory.open(Paths.get("C://lucene"));
+		dir=FSDirectory.open(Paths.get(folder));
+		System.out.println("======================== " + folder + "======================== ");
 		SmartChineseAnalyzer analyzer=new SmartChineseAnalyzer();
 		IndexWriterConfig iwc=new IndexWriterConfig(analyzer);
 		IndexWriter writer=new IndexWriter(dir, iwc);
@@ -111,7 +115,7 @@ public class BlogIndex {
 	 * @throws Exception
 	 */
 	public List<Blog> searchBlog(String q)throws Exception{
-		dir=FSDirectory.open(Paths.get("C://lucene"));
+		dir=FSDirectory.open(Paths.get(folder));
 		IndexReader reader = DirectoryReader.open(dir);
 		IndexSearcher is=new IndexSearcher(reader);
 		BooleanQuery.Builder booleanQuery = new BooleanQuery.Builder();

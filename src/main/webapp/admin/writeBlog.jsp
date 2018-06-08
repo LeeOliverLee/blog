@@ -32,7 +32,10 @@
 			alert("请输入内容！");
 		}else{
 			$.post("${pageContext.request.contextPath}/admin/blog/save.do",{'title':title,'blogType.id':blogTypeId,'content':content,'contentNoTag':UE.getEditor('editor').getContentTxt(),'summary':UE.getEditor('editor').getContentTxt().substr(0,155),'keyWord':keyWord},function(result){
-				if(result.success){
+                $("#publish").linkbutton({
+                    text: "发布博客"
+                });
+			    if(result.success){
 					alert("博客发布成功！");
 					resetValue();
 				}else{
@@ -73,7 +76,7 @@
    		<tr>
    			<td valign="top">博客内容：</td>
    			<td>
-				   <script id="editor" type="text/plain" style="width:100%;height:500px;"></script>
+				   <div id="editor" type="text/plain" style="width:100%;height:500px;"></div>
    			</td>
    		</tr>
    		<tr>
@@ -83,7 +86,7 @@
    		<tr>
    			<td></td>
    			<td>
-   				<a href="javascript:submitData()" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">发布博客</a>
+   				<a href="javascript:submitData()" id="publish" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">发布博客</a>
    			</td>
    		</tr>
    	</table>
@@ -95,6 +98,11 @@
     //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
     var ue = UE.getEditor('editor');
 
+    $("#publish").click(function(){
+        $("#publish").linkbutton({
+            text: "正在发布......"
+        });
+    });
 
 </script>
 </body>
